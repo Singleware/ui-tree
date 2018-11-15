@@ -1,0 +1,49 @@
+{
+  "author": {
+    "name": "Silas B. Domingos",
+    "email": "hello@balmante.eti.br",
+    "url": "https://balmante.eti.br"
+  },
+  "name": "@singleware/ui-tree",
+  "description": "Singleware UI tree package.",
+  "license": "MIT",
+  "version": "1.0.12",
+  "main": "release/source/index.js",
+  "types": "release/types/index.d.ts",
+  "keywords": [
+    "tree",
+    "ui tree",
+    "user interface",
+    "shadow dom",
+    "browser"
+  ],
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/singleware/ui-tree"
+  },
+  "engines": {
+    "node": ">=8"
+  },
+  "dependencies": {
+    "@singleware/class": "^1.1.12",
+    "@singleware/jsx": "^1.0.16",
+    "@singleware/ui-control": "^1.1.3"
+  },
+  "devDependencies": {
+    "prettier": "^1.15.2",
+    "typescript": "^2.9.2"
+  },
+  "prettier": {
+    "printWidth": 140,
+    "tabWidth": 2,
+    "singleQuote": true,
+    "semi": true
+  },
+  "scripts": {
+    "build": "npm run make && npm run update",
+    "make": "tsc",
+    "update": "npm run update-tree && npm run update-node",
+    "update-tree": "cp -Rf ./source/tree/*.d.ts ./release/types/tree",
+    "update-node": "cp -Rf ./source/node/*.d.ts ./release/types/node"
+  }
+}
