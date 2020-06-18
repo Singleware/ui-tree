@@ -60,4 +60,8 @@ export interface Properties {
    * Change event.
    */
   onChange?: () => void;
+  /**
+   * Select event.
+   */
+  onSelect?: () => void;
 }

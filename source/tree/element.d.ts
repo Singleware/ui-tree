@@ -15,15 +15,11 @@ export interface Element extends HTMLDivElement {
   /**
    * Tree values.
    */
-  value?: any[];
+  value?: any;
   /**
    * Default tree value.
    */
   readonly defaultValue: any[];
-  /**
-   * Selected node.
-   */
-  readonly selected?: any;
   /**
    * Tree level length.
    */

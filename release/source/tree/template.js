@@ -5,9 +5,9 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
     else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
     return c > 3 && r && Object.defineProperty(target, key, r), r;
 };
-Object.defineProperty(exports, "__esModule", { value: true });
 var Template_1;
-"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
+exports.Template = void 0;
 /**
  * Copyright (C) 2018 Silas B. Domingos
  * This source code is licensed under the MIT License as described in the file LICENSE.
@@ -44,11 +44,11 @@ let Template = Template_1 = class Template extends Control.Component {
         /**
          * Mirror element to hide the default drag and drop image.
          */
-        this.hiddenMirror = DOM.create("div", { style: "position: absolute; height: 0px; width: 0px; left: 0px; top: 0px;" });
+        this.hiddenMirror = (DOM.create("div", { style: "position: absolute; height: 0px; width: 0px; left: 0px; top: 0px;" }));
         /**
          * Tree entries slot.
          */
-        this.entrySlot = DOM.create("slot", { name: "node", class: "node" });
+        this.entrySlot = (DOM.create("slot", { name: "node", class: "node" }));
         /**
          * Tree styles.
          */
@@ -137,7 +137,7 @@ let Template = Template_1 = class Template extends Control.Component {
         const event = new CustomEvent('rendernode', { bubbles: true, cancelable: true, detail: detail });
         let dragger, checker;
         if (!this.skeleton.dispatchEvent(event) || !detail.content) {
-            detail.content = DOM.create("div", null, data.toLocaleString());
+            detail.content = (DOM.create("div", null, data.toLocaleString()));
         }
         detail.content.slot = 'content';
         if ((dragger = detail.dragger)) {
@@ -178,7 +178,7 @@ let Template = Template_1 = class Template extends Control.Component {
         const detail = { data: data };
         const event = new CustomEvent('rendermirror', { bubbles: true, cancelable: true, detail: detail });
         if (!this.skeleton.dispatchEvent(event) || !detail.mirror) {
-            detail.mirror = DOM.create("div", null, data.toLocaleString());
+            detail.mirror = (DOM.create("div", null, data.toLocaleString()));
         }
         detail.mirror.slot = 'node';
         detail.mirror.draggable = false;
@@ -202,6 +202,9 @@ let Template = Template_1 = class Template extends Control.Component {
                 selection.node = this.matchedNodes.get(data);
                 selection.node.selected = true;
                 selection.data = data;
+            }
+            if (this.properties.onSelect) {
+                this.properties.onSelect();
             }
         }
     }
@@ -355,7 +358,15 @@ let Template = Template_1 = class Template extends Control.Component {
      * Assign all elements properties.
      */
     assignProperties() {
-        this.assignComponentProperties(this.properties, ['name', 'value', 'required', 'readOnly', 'disabled', 'draggable', 'selectable']);
+        this.assignComponentProperties(this.properties, [
+            'name',
+            'value',
+            'required',
+            'readOnly',
+            'disabled',
+            'draggable',
+            'selectable'
+        ]);
     }
     /**
      * Gets the tree values.

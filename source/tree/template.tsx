@@ -55,13 +55,15 @@ export class Template<T extends Properties = Properties> extends Control.Compone
    * Mirror element to hide the default drag and drop image.
    */
   @Class.Private()
-  private hiddenMirror = <div style="position: absolute; height: 0px; width: 0px; left: 0px; top: 0px;" /> as HTMLDivElement;
+  private hiddenMirror = (
+    <div style="position: absolute; height: 0px; width: 0px; left: 0px; top: 0px;" />
+  ) as HTMLDivElement;
 
   /**
    * Tree entries slot.
    */
   @Class.Private()
-  private entrySlot = <slot name="node" class="node" /> as HTMLSlotElement;
+  private entrySlot = (<slot name="node" class="node" />) as HTMLSlotElement;
 
   /**
    * Tree styles.
@@ -166,7 +168,7 @@ export class Template<T extends Properties = Properties> extends Control.Compone
     const event = new CustomEvent<Events.RenderNode>('rendernode', { bubbles: true, cancelable: true, detail: detail });
     let dragger, checker;
     if (!this.skeleton.dispatchEvent(event) || !detail.content) {
-      detail.content = <div>{data.toLocaleString()}</div> as HTMLDivElement;
+      detail.content = (<div>{data.toLocaleString()}</div>) as HTMLDivElement;
     }
     detail.content.slot = 'content';
     if ((dragger = detail.dragger)) {
@@ -210,7 +212,7 @@ export class Template<T extends Properties = Properties> extends Control.Compone
     const detail = { data: data } as Events.RenderMirror;
     const event = new CustomEvent<Events.RenderMirror>('rendermirror', { bubbles: true, cancelable: true, detail: detail });
     if (!this.skeleton.dispatchEvent(event) || !detail.mirror) {
-      detail.mirror = <div>{data.toLocaleString()}</div> as HTMLDivElement;
+      detail.mirror = (<div>{data.toLocaleString()}</div>) as HTMLDivElement;
     }
     detail.mirror.slot = 'node';
     detail.mirror.draggable = false;
@@ -233,9 +235,12 @@ export class Template<T extends Properties = Properties> extends Control.Compone
         selection.data = void 0;
       }
       if (different) {
-        selection.node = this.matchedNodes.get(data) as Node.Element;
+        selection.node = this.matchedNodes.get(data)!;
         selection.node.selected = true;
         selection.data = data;
+      }
+      if (this.properties.onSelect) {
+        this.properties.onSelect();
       }
     }
   }
@@ -374,9 +379,9 @@ export class Template<T extends Properties = Properties> extends Control.Compone
    */
   @Class.Private()
   private bindHandlers(): void {
-    this.skeleton.addEventListener('rendernode', this.renderNodeHandler.bind(this));
-    this.skeleton.addEventListener('rendermirror', this.renderMirrorHandler.bind(this));
-    this.skeleton.addEventListener('change', this.changeNodeHandler.bind(this));
+    this.skeleton.addEventListener('rendernode', this.renderNodeHandler.bind(this) as EventListener);
+    this.skeleton.addEventListener('rendermirror', this.renderMirrorHandler.bind(this) as EventListener);
+    this.skeleton.addEventListener('change', this.changeNodeHandler.bind(this) as EventListener);
   }
 
   /**
@@ -410,7 +415,15 @@ export class Template<T extends Properties = Properties> extends Control.Compone
    */
   @Class.Private()
   private assignProperties(): void {
-    this.assignComponentProperties(this.properties, ['name', 'value', 'required', 'readOnly', 'disabled', 'draggable', 'selectable']);
+    this.assignComponentProperties(this.properties, [
+      'name',
+      'value',
+      'required',
+      'readOnly',
+      'disabled',
+      'draggable',
+      'selectable'
+    ]);
   }
 
   /**
@@ -444,7 +457,7 @@ export class Template<T extends Properties = Properties> extends Control.Compone
    */
   public set value(value: any) {
     if (this.selectable) {
-      const node = this.matchedNodes.get(value) as Node.Element;
+      const node = this.matchedNodes.get(value)!;
       if (node) {
         this.selectHandler(value);
       }

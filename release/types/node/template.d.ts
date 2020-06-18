@@ -110,56 +110,63 @@ export declare class Template<T extends Properties = Properties> extends Control
     /**
      * Gets the expanded state.
      */
+    get expanded(): boolean;
     /**
-    * Sets the expanded state.
-    */
-    expanded: boolean;
+     * Sets the expanded state.
+     */
+    set expanded(state: boolean);
     /**
      * Gets the selected state.
      */
+    get selected(): boolean;
     /**
-    * Sets the selected state.
-    */
-    selected: boolean;
+     * Sets the selected state.
+     */
+    set selected(state: boolean);
     /**
      * Gets the required state.
      */
+    get required(): boolean;
     /**
-    * Sets the required state.
-    */
-    required: boolean;
+     * Sets the required state.
+     */
+    set required(state: boolean);
     /**
      * Gets the read-only state.
      */
+    get readOnly(): boolean;
     /**
-    * Sets the read-only state.
-    */
-    readOnly: boolean;
+     * Sets the read-only state.
+     */
+    set readOnly(state: boolean);
     /**
      * Gets the disabled state.
      */
+    get disabled(): boolean;
     /**
-    * Sets the disabled state.
-    */
-    disabled: boolean;
+     * Sets the disabled state.
+     */
+    set disabled(state: boolean);
     /**
      * Gets the draggable state.
      */
+    get draggable(): boolean;
     /**
-    * Sets the draggable state.
-    */
-    draggable: boolean;
+     * Sets the draggable state.
+     */
+    set draggable(state: boolean);
     /**
      * Gets the selectable state.
      */
+    get selectable(): boolean;
     /**
-    * Sets the selectable state.
-    */
-    selectable: boolean;
+     * Sets the selectable state.
+     */
+    set selectable(state: boolean);
     /**
      * Gets the node element.
      */
-    readonly element: Element;
+    get element(): Element;
     /**
      * Adds a new node into the subtree of this node.
      * @param data Node data.
